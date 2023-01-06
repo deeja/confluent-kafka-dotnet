@@ -57,7 +57,7 @@ namespace Confluent.Kafka
     /// <summary>
     ///     A builder class for <see cref="IProducer{TKey,TValue}" />.
     /// </summary>
-    public class ProducerBuilder<TKey, TValue>
+    public class ProducerBuilder<TKey, TValue> : IProducerBuilder<TKey, TValue>
     {
         /// <summary>
         ///     The config dictionary.
@@ -165,7 +165,7 @@ namespace Confluent.Kafka
         ///     will be devivered to your error handler, if set, else they will be
         ///     silently ignored.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetStatisticsHandler(Action<IProducer<TKey, TValue>, string> statisticsHandler)
+        public IProducerBuilder<TKey, TValue> SetStatisticsHandler(Action<IProducer<TKey, TValue>, string> statisticsHandler)
         {
             if (this.StatisticsHandler != null)
             {
@@ -179,7 +179,7 @@ namespace Confluent.Kafka
         ///     Set a custom partitioner to use when producing messages to
         ///     <paramref name="topic" />.
         /// </summary>
-        public ProducerBuilder<TKey, TValue> SetPartitioner(string topic, PartitionerDelegate partitioner)
+        public IProducerBuilder<TKey, TValue> SetPartitioner(string topic, PartitionerDelegate partitioner)
         {
             if (string.IsNullOrWhiteSpace(topic))
             {
@@ -197,7 +197,7 @@ namespace Confluent.Kafka
         ///     Set a custom partitioner that will be used for all topics
         ///     except those for which a partitioner has been explicitly configured.
         /// </summary>
-        public ProducerBuilder<TKey, TValue> SetDefaultPartitioner(PartitionerDelegate partitioner)
+        public IProducerBuilder<TKey, TValue> SetDefaultPartitioner(PartitionerDelegate partitioner)
         {
             if (this.DefaultPartitioner != null)
             {
@@ -220,7 +220,7 @@ namespace Confluent.Kafka
         ///     Exceptions: Any exception thrown by your error handler will be silently
         ///     ignored.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetErrorHandler(Action<IProducer<TKey, TValue>, Error> errorHandler)
+        public IProducerBuilder<TKey, TValue> SetErrorHandler(Action<IProducer<TKey, TValue>, Error> errorHandler)
         {
             if (this.ErrorHandler != null)
             {
@@ -249,7 +249,7 @@ namespace Confluent.Kafka
         ///     Exceptions: Any exception thrown by your log handler will be
         ///     silently ignored.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetLogHandler(Action<IProducer<TKey, TValue>, LogMessage> logHandler)
+        public IProducerBuilder<TKey, TValue> SetLogHandler(Action<IProducer<TKey, TValue>, LogMessage> logHandler)
         {
             if (this.LogHandler != null)
             {
@@ -281,7 +281,7 @@ namespace Confluent.Kafka
         ///     set token or token failure string - Value of configuration
         ///     property sasl.oauthbearer.config
         /// </param>
-        public ProducerBuilder<TKey, TValue> SetOAuthBearerTokenRefreshHandler(Action<IProducer<TKey, TValue>, string> oAuthBearerTokenRefreshHandler)
+        public IProducerBuilder<TKey, TValue> SetOAuthBearerTokenRefreshHandler(Action<IProducer<TKey, TValue>, string> oAuthBearerTokenRefreshHandler)
         {
             if (this.OAuthBearerTokenRefreshHandler != null)
             {
@@ -300,7 +300,7 @@ namespace Confluent.Kafka
         ///     Local_KeySerialization and thrown by the initiating call to
         ///     Produce or ProduceAsync.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetKeySerializer(ISerializer<TKey> serializer)
+        public IProducerBuilder<TKey, TValue> SetKeySerializer(ISerializer<TKey> serializer)
         {
             if (this.KeySerializer != null || this.AsyncKeySerializer != null)
             {
@@ -319,7 +319,7 @@ namespace Confluent.Kafka
         ///     Local_ValueSerialization and thrown by the initiating call to
         ///     Produce or ProduceAsync.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetValueSerializer(ISerializer<TValue> serializer)
+        public IProducerBuilder<TKey, TValue> SetValueSerializer(ISerializer<TValue> serializer)
         {
             if (this.ValueSerializer != null || this.AsyncValueSerializer != null)
             {
@@ -338,7 +338,7 @@ namespace Confluent.Kafka
         ///     Local_KeySerialization and thrown by the initiating call to
         ///     Produce or ProduceAsync.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetKeySerializer(IAsyncSerializer<TKey> serializer)
+        public IProducerBuilder<TKey, TValue> SetKeySerializer(IAsyncSerializer<TKey> serializer)
         {
             if (this.KeySerializer != null || this.AsyncKeySerializer != null)
             {
@@ -357,7 +357,7 @@ namespace Confluent.Kafka
         ///     Local_ValueSerialization and thrown by the initiating call to
         ///     Produce or ProduceAsync.
         /// </remarks>
-        public ProducerBuilder<TKey, TValue> SetValueSerializer(IAsyncSerializer<TValue> serializer)
+        public IProducerBuilder<TKey, TValue> SetValueSerializer(IAsyncSerializer<TValue> serializer)
         {
             if (this.ValueSerializer != null || this.AsyncValueSerializer != null)
             {
